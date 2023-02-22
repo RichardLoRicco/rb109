@@ -4,43 +4,43 @@ Write a method that takes a String as an argument, and returns a new String that
 a staggered capitalization scheme in which every other character is capitalized, and the remaining characters are lowercase. 
 Characters that are not letters should not be changed, but count as characters when switching between upper and lowercase.
 
-Example:
-staggered_case('I Love Launch School!') == 'I LoVe lAuNcH ScHoOl!'
-staggered_case('ALL_CAPS') == 'AlL_CaPs'
-staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
-
+---
 
 input: a string
-output: a new string
-- contains the original value using a staggered capitalization scheme:
-  -> every other character is capitalized, remaining are lowercase
+return: a new string that contains the original value using a staggered capitalization scheme in which every other
+        character is capitalized, and the remaining characters are lowercase
 rules:
-- characters that are not letters shouldn't be changed, but count as characters when switching between upper and lowercase
+  - characters that are not letters should not be changed, but count as characters when switching between
+    upper and lowercase
+
+----
 
 algorithm:
-define staggered_case method that accepts 1 parameter string
-  split string into an array of characters -> assign to characters
-  mutate characters so that its characters are downcased
-  iterate over characters with index and for each character and index:
-    - if index is even, mutate character so that it is uppercase
-  implicitly return characters joined into a string
+- initialize staggered_string to ""
+- split string into an array of chars and iterate over it with index so that for each char and index:
+  - if index is even, upcase char
+  - if index is odd, downcase char
+  - add char to staggered_string
+- return staggered_string
 
 =end
 
 def staggered_case(string)
-  characters = string.split("")
-  characters.each_with_index do |character, index|
+  staggered_string = ""
+
+  string.chars.each_with_index do |char, index|
     if index.even?
-      character.upcase!
+      char = char.upcase
     else
-      character.downcase!
+      char = char.downcase
     end
+    staggered_string << char
   end
-  characters.join("")
+
+  staggered_string
 end
 
-
-# Test Cases:
+# Example:
 p staggered_case('I Love Launch School!') == 'I LoVe lAuNcH ScHoOl!'
 p staggered_case('ALL_CAPS') == 'AlL_CaPs'
 p staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'

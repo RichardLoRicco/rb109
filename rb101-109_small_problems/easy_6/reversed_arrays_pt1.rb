@@ -27,39 +27,39 @@ list == [] # true
 Note: for the test case list = ['abc'], we want to reverse the elements in the array. 
 The array only has one element, a String, but we're not reversing the String itself, so the reverse! method call should return ['abc'].
 
+----
 
-input: an array 
-output: the same array, but mutated so that it's elements are reversed
+input: an array
+return: the input aray with its elements reversed in place
 rules:
-- the return value should be the same array object
-- can't use Array#reverse or Array#reverse!
+  - can't use Array#reverse or Array#reverse!
+  - must mutate the array passed in as an argument
+
+----
 
 algorithm:
-define method reverse! that accepts 1 parameter arr
-- initialize variable reversed_arr and assign [] to it
-- iterate through arr and for each element:
-  - push that element to the front of reversed_arr
+- initialize index to 0
+- inialize reverse_index to -1
 
-- initialize index variable and assign to 0
-- iterate through arr each element and transform destructively as follows:
-  - reassign element to the element at index position index of reversed_arr
+- until index > (length of arr - 1) / 2 , do the following:
+  - swap arr[index] and arr[reverse_index]
   - increment index by 1
-  - return element
+  - increment reverse_index - 1
 
+- return arr
 =end
 
 def reverse!(arr)
-  reversed_arr = []
-  arr.each do |element|
-    reversed_arr.unshift(element)
-  end
-  
   index = 0
-  arr.map! do |element|
-    element = reversed_arr[index]
+  reverse_index = -1
+
+  until index > (arr.length - 1) / 2
+    arr[index], arr[reverse_index] = arr[reverse_index], arr[index]
     index += 1
-    element
+    reverse_index -= 1
   end
+
+  arr
 end
 
 

@@ -18,37 +18,66 @@ string_to_signed_integer('4321') == 4321
 string_to_signed_integer('-570') == -570
 string_to_signed_integer('+100') == 100
 
-algorithm:
-initialize variable pos_or_neg_multiplier to 1
-check if first character is "-"":
-  - if so, remove and reassign pos_or_neg_multiplier to -1
-check if first character is "+":
-  - if so, remove
+----
 
-same rest of algo
-at end, multiply value by pos_or_neg_multiplier
+input: a string of digits, possibly with a leading + or - sign
+return: the appropriate number as an integer
+rules:
+  - if first character is +, return a positive number
+  - if first character is -, return a negative number
+  - if no sign if given, return a positive number
+
+
+algorithm:
+- initialize STRING_TO_INTEGER_NUMERIC hash with strings "0" through "9" as keys and their associated integers as values
+- initialize integer to 0
+- initialize multiplier to 10 ** (size of string - 1)
+- initialize pos_neg_multiplier to 1
+- if string[0] == +, remove from string
+- if string[0] == -, remove from string and:
+    - reassign pos_neg_multiplier to -1
+
+- iterate through each digit in string and transform each digit as follows:
+  - reassign digit to the value for STRING_TO_INTEGER_NUMERIC[digit]
+  -> assign this transformed array to string_as_integers
+
+- iterate through string_as_integers and for each digit:
+  - reassign digit to the value for STRING_TO_INTEGER_NUMERIC[digit]
+  - multiply digit by multiplier and add return value to integer
+  - divide multiplier by 10
+- return integer * pos_neg_multiplier
+
+
+
 =end
 
-DIGITS = {
-  '0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4,
-  '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9
-}
+
+STRING_TO_INTEGER_NUMERIC = { "0" => 0, "1" => 1, "2" => 2, "3" => 3, "4" => 4,
+  "5" => 5, "6" => 6, "7" => 7, "8" => 8, "9" => 9 }
+
 
 def string_to_signed_integer(string)
-  pos_or_neg_multiplier = 1
-  
+  pos_neg_multiplier = 1
+  integer = 0
+
+  string = string[1..-1] if string[0] == "+"
+
   if string[0] == "-"
-    string.slice!(0)
-    pos_or_neg_multiplier = -1
-  elsif string[0] == "+"
-    string.slice!(0)
+    string = string[1..-1]
+    pos_neg_multiplier = -1
   end
 
-  digits = string.chars.map { |char| DIGITS[char] }
+  multiplier = 10 ** (string.size - 1)
 
-  value = 0
-  digits.each { |digit| value = 10 * value + digit }
-  value * pos_or_neg_multiplier
+  string_as_integers = string.chars.map { |digit| STRING_TO_INTEGER_NUMERIC[digit] }
+  string_as_integers
+
+  string_as_integers.each do |digit|
+    integer += digit * multiplier
+    multiplier /= 10
+  end
+
+  integer * pos_neg_multiplier
 end
 
 

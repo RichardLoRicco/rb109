@@ -9,47 +9,43 @@ Example:
 swapcase('CamelCase') == 'cAMELcASE'
 swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
 
+----
 
 input: a string
-output: a new string
-  - every uppercase letter is replaced by its lowercase version
-  - every lowercase letter is replaced by its uppercase version
-  - all other characters remain unchanged
+return: a new string in which every uppercase letter is replaced by its lowercase version, and
+        every lowercase letter by its uppercase version
 rules:
-- can't use String#swapcase
+  - all other characters should be unchanged
+  - can't use String#swapcase
+
+----
 
 algorithm:
-create array of uppercase letters -> UPPERCASE_LETTERS
-create array of lowercase letters -> LOWERCASE_LETTERS
-
-define swapcase method that accepts 1 parameter string
-  split string into an array of characters, assign to characters
-  iterate over characters, and for each character destructively transform as follows:
-    - if LOWERCASE_LETTERS includes character, replace with uppercase 
-    - if UPPERCASE_LETTERS includes character, replace with lowercase
-    - if neither, remain as is
-  join characters into a string
+- initialize swapcased_string to ""
+- split string into an array of chars and iterate over array so that for each char: 
+  - if char has a count of 1 when searching for uppercase letters:
+    - reassign char to its lowercase equivalent
+  - otherwise if char has a count of 1 when searching for lowercase letters:
+    - reassign char to its uppercase equivalent
+  - add char to swapcased_string
+- return swapcased_string
 
 =end
 
-UPPERCASE_LETTERS = ("A".."Z").to_a
-LOWERCASE_LETTERS = ("a".."z").to_a
-
 def swapcase(string)
-  characters = string.split("")
-  characters.map! do |character|
-    if UPPERCASE_LETTERS.include?(character)
-      character.downcase
-    elsif LOWERCASE_LETTERS.include?(character)
-      character.upcase
-    else
-      character
+  swapcased_string = ""
+
+  string.chars.each do |char|
+    if char.count("A-Z") == 1
+      char = char.downcase
+    elsif char.count("a-z") == 1
+      char = char.upcase
     end
+    swapcased_string << char
   end
-  characters.join("")
+
+  swapcased_string
 end
-
-
 
 # Test Cases:
 p swapcase('CamelCase') == 'cAMELcASE'

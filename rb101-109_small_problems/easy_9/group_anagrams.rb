@@ -13,43 +13,50 @@ Your output should look something like this:
 ["neon", "none"]
 #(etc)
 
+----
 
-input: an array
-output: print out a series of arrays
-- these arrays are groups of words that are anagrams
+input: an array of words (strings)
+output: print out groups of words that are anagrams
 rules:
-- anagrams are words that have the same exact letters in them but in a different order
+  - anagrams are words that have the same exact letters in them but in a different order
+
+----
 
 algorithm:
-initialize result to {}
-iterate through words and for each word:
-  - initialize key and assign it to the word sorted alphabetically
-  - if results contains the key key:
-    - push word to the value array for that key in result
-  - otherwise, 
-    - add the key value, with key being the key and [word] being the value
+initialize words to ['demo', 'none', 'tied', 'evil', 'dome', 'mode', 'live',
+  'fowl', 'veil', 'wolf', 'diet', 'vile', 'edit', 'tide',
+  'flow', 'neon']
 
-for each array value of result,
-  output said value
+inialize results to {}
+
+iterate through words, and for each word:
+  - sort the word -> assign to sorted_word
+  
+  - if sorted_word is a key:
+      - if word is present in the value hash, do nothing
+      - if word is not present in the value hash, add word as as a string inside of an array to the sorted_word ket in results
+  - if sorted_word is not a key, add sorted_word as key and word as string inside of an array to results
+
+for each value in results:
+  - output the value on separate lines
+    -> think puts
+
 =end
 
 words =  ['demo', 'none', 'tied', 'evil', 'dome', 'mode', 'live',
   'fowl', 'veil', 'wolf', 'diet', 'vile', 'edit', 'tide',
   'flow', 'neon']
 
-result = {}
+results = {}
 
 words.each do |word|
-  key = word.split("").sort.join("")
+  sorted_word = word.split("").sort.join("")
 
-  if result.has_key?(key)
-    result[key].push(word)
+  if results.has_key?(sorted_word)
+    results[sorted_word] << word
   else
-    result[key] = [word]
+    results[sorted_word] = [word]
   end
 end
 
-result.each_value do |value|
-  puts "------"
-  p value
-end
+results.each_value { |value| p value }

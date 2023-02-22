@@ -6,37 +6,32 @@ if a number is divisible by 5, print "Buzz", and finally if a number is divisibl
 Example:
 fizzbuzz(1, 15) # -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
 
+----
 
-inputs:
-  1. an integer (starting number)
-  2. an integer (ending number)
-output:
-- print out all numbers from starting number to ending number, BUT
-  - if a number is divisible by 3, print "Fizz";
-  - if a number is divisible by 5, print "Buzz"; and
-  - if a number is divisible by 3 and 5, print "FizzBuzz"
+input: a starting number and an ending number (both appear to be integers)
+output: print out all numbers from the starting number to the ending number, except:
+  - if a number is divisible by 3, print "Fizz"
+  - if a number is divisible by 5, print "Buzz"
+  - and if a number is divisible by both 3 and 5, print "FizzBuzz"
+
+----
 
 algorithm:
-define fizzbuzz method that accepts 2 parameters, starting_num and ending_num
-    initialize results to []
-    create an array of numbers from starting_num to ending_num: and
-      -> from starting_num to ending_num, for each num do the following:
-        - if num is divisible by 3 and 5:
-            add "FizzBuzz" to results array
-        - else if num is divisible by 3:
-            add "Fizz" to results array
-        - else if num is divisible by 5:
-            add "Buzz" to results array
-        - else:
-            add num to results array
-    print results array joined with commas
+- initialize results to []
+- from starting_num up to _ending_num, do the following for each num:
+  - if num is divisible by 3 and 5, add "FizzBuzz" to results
+  - if num is divisible by 3, add "Fizz" to results
+  - if num is divisible by 5, add "Buzz" to results
+  - otherwise, add num converted to string to results
+- return results joined with commas
 
 =end
 
 def fizzbuzz(starting_num, ending_num)
   results = []
-  (starting_num..ending_num).to_a.each do |num|
-    case 
+
+  starting_num.upto(ending_num) do |num|
+    case
     when num % 3 == 0 && num % 5 == 0
       results << "FizzBuzz"
     when num % 3 == 0
@@ -44,12 +39,13 @@ def fizzbuzz(starting_num, ending_num)
     when num % 5 == 0
       results << "Buzz"
     else
-      results << num
+      results << num.to_s
     end
   end
-  puts results.join(", ")
+
+  results.join(", ")
 end
 
 
 # Test Case:
-fizzbuzz(1, 15) # -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
+p fizzbuzz(1, 15) # -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz

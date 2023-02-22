@@ -7,26 +7,26 @@ repeater('Hello') == "HHeelllloo"
 repeater("Good job!") == "GGoooodd  jjoobb!!"
 repeater('') == ''
 
+----
 
 input: a string
-output: a new string
-- take every character from input string and double it
+return: a new string in which every character is doubled
 
-algoritm:
-define method repeater that accepts 1 parameter string
-  split string into an array, and for each character transform as follows:
-  - double each character
-  join the array
+----
+
+algorithm:
+- split string into an array of chars, and iterate over that array, transforming each char as follows:
+  - multiply char by 2
+-> join the array
+
+
 =end
 
 def repeater(string)
-  string.split("").map { |char| char * 2 }.join("")
-end
-
-
-
-
-
-p repeater('Hello') == "HHeelllloo"
-p repeater("Good job!") == "GGoooodd  jjoobb!!"
-p repeater('') == ''
+  string.chars.map { |char| char * 2 }.join("")
+ end
+ 
+ 
+ p repeater('Hello') == "HHeelllloo"
+ p repeater("Good job!") == "GGoooodd  jjoobb!!"
+ p repeater('') == ''

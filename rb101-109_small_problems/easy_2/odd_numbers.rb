@@ -1,18 +1,16 @@
-# Print all odd numbers from 1 to 99, inclusive, to the console, with each number on a separate line.
+=begin
 
-# input: nothing
-# output: print all odd numbers from 1 to 99 (including them) on separate lines
+Print all odd numbers from 1 to 99, inclusive, to the console, with each number on a separate line.
 
-# algorithm:
-# create counter variable and set to 0
-# loop as follows:
-#   - add 1 to counter
-#   - print counter if counter is odd
-#   - break out of loop when counter is greater than or equal to 99
+----
+input: nothing
+output: print all odd numbers from 1 to 99, inclusive
+rules:
+  - each number should be on a separate line -> use puts
 
-counter = 0
-loop do
-  counter += 1
-  puts counter if counter.odd?
-  break if counter >= 99
-end
+algorithm:
+from 1 up to 99, output each num (on separate line) if num is odd
+
+=end
+
+1.upto(99) { |num| puts num if num.odd? }

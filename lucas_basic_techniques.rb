@@ -105,7 +105,9 @@ def last_index(input_string, element)
   input_string.chars.each_with_index { |char, index| indices << index if char == element }
   indices.max 
 end
-ALT
+
+# ALT
+
 def last_index(input_string, element)
   last_index = 0
   input_string.chars.each_with_index do |char, index| 
@@ -234,7 +236,7 @@ end
 # Get nth Fibonacci number
 
 def fibonacci(n)
-  return 1 if n < 2
+  return 1 if n <= 2
 
   fibonacci(n - 1) + fibonacci(n - 2)
 end

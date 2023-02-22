@@ -1,27 +1,34 @@
-# Write a method that takes two arguments, a string and a positive integer, and prints 
-# the string as many times as the integer indicates.
+=begin
 
-# Example:
+Write a method that takes two arguments, a string and a positive integer, and prints 
+the string as many times as the integer indicates.
 
-# repeat('Hello', 3)
+Example:
 
-# Output:
-# Hello
-# Hello
-# Hello
+repeat('Hello', 3)
 
-# inputs: a string and a positive integer
-# outputs: string(s)
-# rules:
-# - method prints the input string as many times as the integer indicates 
+Output:
+Hello
+Hello
+Hello
 
-# Algorithm
-# - define method repeat that accepts two arguments, string and positive integer
-#   - positive integer times do the following:
-#     -> output string
+-----
 
-def repeat(string, positive_integer)  
-  positive_integer.times { puts string }
+inputs: 2 arguments:
+  1. a string
+  2. a positive integer
+
+output: print the string as many times as the integer indicates
+
+algorithm:
+define repeat method that accepts 2 parameters, string and pos_int
+  - pos_int times, do the following:
+    - output string (use puts method)
+
+=end
+
+def repeat(string, pos_int)
+  pos_int.times { puts string }
 end
 
 repeat('Hello', 3)

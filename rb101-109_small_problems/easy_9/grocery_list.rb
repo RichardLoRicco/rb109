@@ -26,8 +26,7 @@ def buy_fruit(fruits_with_quantities)
   fruits_corrected = []
 
   fruits_with_quantities.each do |pair|
-    quantity = pair[1]
-    fruit = pair[0]
+    fruit, quantity = pair[0], pair[1]
     quantity.times { fruits_corrected << fruit }
   end
   

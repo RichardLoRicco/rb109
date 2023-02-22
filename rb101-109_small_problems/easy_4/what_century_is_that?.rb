@@ -5,116 +5,80 @@ begins with the century number, and ends with st, nd, rd, or th as appropriate f
 
 New centuries begin in years that end with 01. So, the years 1901-2000 comprise the 20th century.
 
-Examples:
-century(2000) == '20th'
-century(2001) == '21st'
-century(1965) == '20th'
-century(256) == '3rd'
-century(5) == '1st'
-century(10103) == '102nd'
-century(1052) == '11th'
-century(1127) == '12th'
-century(11201) == '113th'
 
+----
 
-input: an integer (denoting the year)
-output: a string (denoting the century)
+input: a year
+return: the century
 rules:
-- return value should be a string that begins with century number, and ends
-with st, nd, rd, or th as appropriate
-- new centuries begin in years that end with 01
-  -> so, the years 1901 - 2000 comprise the 20th century
-- if year doesn't end in 0, century is year / 100 + 1
-  -> if year ends in 0 , subtract 1
+  - return value should be a string that begins with century number and ends with st, nd, rd, or th
+  - new centuries begin in years that end with 01
+    -> ex) years 1901-2000 comprise the 20th century
+
+----
 
 algorithm:
-looking into endings:
-1st
-2nd
-3rd
-4th
-5th
-6th
-7th
-8th
-9th
-10th
-11th
-12th
-13th
-.
-.
-.
-20th
-21st
-22nd
-23rd
-24th
-.
+1. century (return century)
+  - divide year by 100:
+    -> assign quotient to century
+    -> assign the remainder to remainder
+  - if the remainder >= 1, add 1 to century
+
+  - invoke century suffix and pass in century as argument
+    -> assign return value to suffix
+
+  - combine century and suffix using string interpolation
 
 
-# find century number
-define century method that accepts 1 parameter year
-  cent = year / 100 + 1
-  if year ends with 00, then - 1 from cent
+2. century_suffix (return suffix)
+  # Examples:
+  1st
+  2nd
+  3rd
+  4th
+  ..
+  20th
+  21st
+  22nd
+  23rd
+  24th
 
-
-  suffix = return value of invoking century_suffix method and passing in cent as an argument
-  implicitly return cent + suffic using string interpolation
-
-# find century suffix
-define century_suffix method that accepts 1 parameter century
-    if century ends in 11, 12, or 13, return "th"
-    initialize last_digit variable to the last digit of century
-    case last_digit
-      when 0
-        - 'th'
-      when 1
-        - 'st'
-      when 2
-        - 'nd'
-      when 3
-        - 'rd'
-      else
-        - 'th'
-
+  # method implementation
+  - if century ends in 11, 12, or 13, return th
+  - if century ends in 1, return st
+  - if century ends in 2, return nd
+  - if century ends in 3, return rd
+  - else, return th
 
 =end
 
 def century(year)
-  cent = year / 100 + 1
-  if year % 100 == 0
-    cent -= 1
-  end
-
+  cent, remainder = year.divmod(100)
+  cent += 1 if remainder >= 1
+  cent = cent.to_s
+  
   suffix = century_suffix(cent)
   
-  cent.to_s + suffix
+  cent + suffix
 end
 
-def century_suffix(century)
-  if [11, 12, 13].include?(century % 100)
-    return 'th'
-  end
-
-  last_digit = century.to_s[-1].to_i
-  
-  case last_digit
-  when 0
-    "th"
-  when 1
-    "st"
-  when 2
-    "nd"
-  when 3
-    "rd"
+def century_suffix(cent)
+  case
+  when cent.end_with?("11", "12", "13")
+    return "th"
+  when cent.end_with?("1")
+    return "st"
+  when cent.end_with?("2")
+    return "nd"
+  when cent.end_with?("3")
+    return "rd"
   else
-    "th"
+    return "th"
   end
 end
 
 
-# Test Cases:
+# Examples:
 p century(2000) == '20th'
 p century(2001) == '21st'
 p century(1965) == '20th'

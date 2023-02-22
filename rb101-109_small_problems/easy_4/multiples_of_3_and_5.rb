@@ -54,12 +54,14 @@ Which is clearer? Which is more succinct?
 
 =end
 
-def multisum(int)
-  int_arr = (1..int).to_a
-  multiples_arr = int_arr.select do |num|
-    num % 3 == 0 || num % 5 == 0
+def multisum(num)
+  multiples = []
+  1.upto(num) do |n|
+    if n % 3 == 0 || n % 5 == 0 
+      multiples << n
+    end
   end
-  multiples_arr.reduce(:+)
+  multiples.reduce(:+)
 end
 
 # Test Cases

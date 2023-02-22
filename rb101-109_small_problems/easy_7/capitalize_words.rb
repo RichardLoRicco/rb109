@@ -5,40 +5,25 @@ of the argument with the first character of every word capitalized and all other
 
 You may assume that words are any sequence of non-blank characters.
 
-Examples
-word_cap('four score and seven') == 'Four Score And Seven'
-word_cap('the javaScript language') == 'The Javascript Language'
-word_cap('this is a "quoted" word') == 'This Is A "quoted" Word'
-
+----
 
 input: a string
-output: return a new string
-- this new string must contain the original value of the argument with the first character of every word capitalized 
-and all other letters lowercase
-rules:
-- assume that words are any sequence of non-blank characters
-- words that begin with a non-letter character are all downcased
+output: return a new string that contains the original value of the argument with first character of every word capitalized and all others lowercase
 
 algorithm:
-define word_cap method that accepts 1 parameter string
-  initialize words and assign to string split into an array by spaces
-  iterate through each word in words and transform as follows:
-    - destructively capitalize word
-  join words into a string (implicit return)
+define word_cap method that accepts 1 parameter sentence
+  - break sentence into an array and transform each word as follows:
+    - capitalize word
+  - join the array with spaces -> i.e., convert back to string
 
 =end
 
-def word_cap(string)
-  words = string.split(" ")
-  words.each do |word|
-    word.capitalize!
-  end
-  words.join(" ")
+def word_cap(sentence)
+  sentence.split(" ").map { |word| word.capitalize }.join(" ")  
 end
 
 
-
-# Test Cases:
+# Examples
 p word_cap('four score and seven') == 'Four Score And Seven'
 p word_cap('the javaScript language') == 'The Javascript Language'
 p word_cap('this is a "quoted" word') == 'This Is A "quoted" Word'

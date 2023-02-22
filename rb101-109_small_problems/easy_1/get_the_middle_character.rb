@@ -10,36 +10,35 @@ center_of('Launch') == 'un'
 center_of('Launchschool') == 'hs'
 center_of('x') == 'x'
 
+----
 
-input: a non-empty string
-output: a string
-- consists of the middle character or characters of the argument
+input: a non-empty string argument
+output: return the middle character(s)
 rules:
-- if argument has odd length, return one character
-- if argument has even length, return exactly two characters
-- looking at the examples, spaces count
+- if argument has odd length, return 1 character
+- if argument has even length, return exactly 2 characters
 
+----
 
 algorithm:
 define center_of method that accepts 1 parameter string
-  if size of string is odd:
-    return character at index position that is the floor of dividing the size of string by 2
-  if size of string is even:
-    return character(s) at the following index positions:
-      start at the position that is 2 less than the size of the string divided by 2
-      length of 1
-
+  - initialize length to length of string
+  
+  - if length is even:
+      -> return 2 character slice of string at position (length / 2) - 1 
+  - otherwise (if length is odd)
+      -> return 1 character slice of string at position (length / 2)
 
 =end
 
 def center_of(string)
-  center_index = string.size/2
-  if string.length.odd?
-    string[center_index]
+  length = string.length
+
+  if length.even?
+    string[(length/2 ) - 1, 2]
   else
-    string[center_index - 1, 2]
+    string[(length/2)]
   end
-  
 end
 
 

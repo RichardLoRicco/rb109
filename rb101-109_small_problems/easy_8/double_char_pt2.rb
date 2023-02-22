@@ -12,33 +12,34 @@ double_consonants('') == ""
 
 
 input: a string
-output: a new string
-- every consonant character is doubled
+return: a new string in which every consonant character is doubled
+rules:
+  - vowels, digits, punctuation, and whitespace should not be doubled
+
+----
+
+algorithm:
+- initialize CONSONANTS to array [ b c d f g h j k l m n p q r s t v w x y z ] 
+
+- split string into an array of chars and transform that array so that each char is transformed as follows:
+  - if CONSONANTS includes char downcased, then multiply char by 2
+  - otherwise, return char
+-> join the array 
 
 
-algoritm:
-initialize CONSONANTS to an array of consonants
-define method repeater that accepts 1 parameter string
-  split string into an array, and for each character transform as follows:
-  - double each character if character a consonant --> account for uppercase by downcasing when checking
-  join the array
 =end
 
 CONSONANTS = %w(b c d f g h j k l m n p q r s t v w x y z)
 
 def double_consonants(string)
-  doubled_array = string.split("").map do |char| 
+  string.chars.map do |char|
     if CONSONANTS.include?(char.downcase)
-      char * 2 
+      char * 2
     else
       char
     end
-  end
-  doubled_array.join("")
+  end.join("")
 end
-
-
-
 
 
 p double_consonants('String') == "SSttrrinngg"

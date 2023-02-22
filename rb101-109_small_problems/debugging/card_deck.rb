@@ -73,24 +73,21 @@ end
 
 # Pick one random card per suit
 
-binding.pry
-
 player_cards = []
 deck.keys.each do |suit|
   cards = deck[suit]
   cards.shuffle!
   player_cards << cards.pop
-  binding.pry
 end
 
 # Determine the score of the remaining cards in the deck
 
 sum = deck.reduce(0) do |sum, (_, remaining_cards)|
-  score = remaining_cards.map do |card|
+  scores = remaining_cards.map do |card|
     score(card)
   end
 
-  sum += score.sum
+  sum += scores.sum
 end
 
 puts sum

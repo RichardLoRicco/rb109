@@ -11,32 +11,30 @@ swap('Oh what a wonderful day it is') == 'hO thaw a londerfuw yad ti si'
 swap('Abcde') == 'ebcdA'
 swap('a') == 'a'
 
+----
 
-input: a string of words
-output: return a string of words
+input: a string of words separated by spaces
+return: a string in which the first and last letters of every word are swapped
 rules:
-- take string input and return string in which the first and last letters of every word are swapped
-- assume that each string contains nothing but words and spaces
-- assume that every word contains at least one letter, and that the string will always contain at least one word
+  - assume that every word contains at least one letter
+  - assume that the string will always contain at least one word
+  - assume that each string contains nothing but words and spaces
+
+----
 
 algorithm:
-define swap method that accepts 1 parameter sentence
-- split sentence into an array using spaces -> assign to variable words
-- iterate through words and, for each word:
-  - initilize first_letter to index 0 of word
-  - initialize last_letter to index -1 of word
-  - reassign index 0 of word to last_letter
-  - reassign index -1 of word to first_letter
-- join words into string using spaces
+- split string_of_words into an array of words using spaces, and transform each word as follows:
+  - swap the first index char and the last index char
+  - return word with the newly reassigned first and last chars
+-> join the array using spaces
 
 =end
 
-def swap(sentence)
-  words = sentence.split(" ")
-  words.each do |word|
+def swap(string_of_words)
+  string_of_words.split.map do |word|
     word[0], word[-1] = word[-1], word[0]
-  end
-  words.join(" ")
+    word
+  end.join(" ")
 end
 
 # Test Cases:

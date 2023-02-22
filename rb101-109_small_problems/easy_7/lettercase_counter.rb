@@ -30,17 +30,12 @@ define method letter_case_count that accepts 1 parameter, str
 =end
 
 def letter_case_count(str)
-  lowercase_count = str.count("a-z")
-  uppercase_count = str.count("A-Z")
-  non_letter_count = str.count("^a-zA-Z")
-
-  case_count_hash = {}
-  case_count_hash[:lowercase] = lowercase_count
-  case_count_hash[:uppercase] = uppercase_count
-  case_count_hash[:neither] = non_letter_count
-  
-  case_count_hash
+  lowercase_chars = str.count("a-z")
+  uppercase_chars = str.count("A-Z")
+  neither_chars = str.count("^a-zA-Z")
+  case_count_hsh = { lowercase: lowercase_chars, uppercase: uppercase_chars, neither: neither_chars }
 end
+
 
 # Test Cases:
 p letter_case_count('abCdef 123') == { lowercase: 5, uppercase: 1, neither: 4 }

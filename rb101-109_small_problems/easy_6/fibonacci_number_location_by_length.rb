@@ -20,41 +20,41 @@ find_fibonacci_index_by_length(10000) == 47847
 
 You may assume that the argument is always greater than or equal to 2.
 
+----
 
-input: an integer
-output: an integer
-  - denotes the index of the first Fibonacci number that has the number of digits specified as an argument
+input: a number representing the number of digits
+return: the index of the first fibonacci number that has the number of digits specified
 rules:
-- first Fibonacci number has index 1
-- assume that the argument is always greater than or equal to 2
+  - first fibonacci number has index 1 (not 0)
+  - argument is always greater than or equal to 2
+  - first 2 numbers are 1, and each subsequent number is the sum of the two previous numbers
+
+----
 
 algorithm:
-define method find_fibonacci_index_by_length that accepts 1 argument, length
-- initialize index and assign to 2 (because current_number starts at index 2)
-- initialize last_number and assign to 1
-- initialize current_number and assign to 1
-- initialize sum and assign to 0
+- initialize index to 2
+- initialize current_num to 1
+- initialize last_num to 1
+
 - loop as follows:
-  - reassign sum to last number + current_number
-  - reassign last_number to current_number's value
-  - reassign current_number to sum's value
+  - break if current_num's size is equal to length
+  - reassign current_num to the sum of current_num and last_num
+  - reassign last_num to current_num
+  -> * do these at the same time *
   - increment index by 1
-  - break when current_number's length is equal to length
-- index (implicitly return)
+  
+  - return index
 
 =end
 
 def find_fibonacci_index_by_length(length)
   index = 2
-  last_number = 1
-  current_number = 1
-  sum = 0
+  current_num = 1
+  last_num = 1
   loop do
-    sum = last_number + current_number
-    last_number = current_number
-    current_number = sum
+    break if current_num.to_s.size == length
+    current_num, last_num = last_num + current_num, current_num
     index += 1
-    break if current_number.to_s.length >= length
   end
   index
 end

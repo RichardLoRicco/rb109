@@ -1,34 +1,40 @@
 =begin
   
-Write a program that will ask a user for an input of a word or multiple words and give back the number of characters. Spaces should not be counted as a character.
+Write a program that will ask a user for an input of a word or multiple words and give back the number of characters.
 
-input: a string (a word of multiple words)
-output: an integer using string interpolation
+Spaces should not be counted as a character.
+
+----
+
+input: a word or multiple words (string)
+output: the number of characters (using string interpolation)
 rules:
-- count the number of characters in the input word
-- spaces don't count
-- all other characters count
+  - spaces should not be counted as a character
+----
 
 algorithm:
-ask user for word or multiple words
-  - save as words
-split into an array based on spaces, then convert back to string without spaces -> save as compressed_words
-find the length of compressed_words -> save as compressed_words_characters
-output value of compressed_words_characters using string interpolation
+- ask for word or multiple words
+  -> save input as string
+- remove spaces from string
+  -> #delete method
+- count the number of characters
+  -> save as char_count
+- output char_count using string interpolation
 
 =end
 
-print "Please write a word or multiple words: "
-words = gets.chomp
+print "Please write word or multiple words: "
+string = gets.chomp
 
-compressed_words = words.split.join("")
+spaces_removed = string.delete(" ")
 
-compressed_words_characters = compressed_words.length
+char_count = spaces_removed.size
 
-puts "There are #{compressed_words_characters} characters in #{words}."
+puts "There are #{char_count} characters in \"#{string}\"."
 
 
 =begin
+
 input:
 Please write word or multiple words: walk 
 
