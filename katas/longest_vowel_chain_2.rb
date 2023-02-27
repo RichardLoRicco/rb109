@@ -42,7 +42,6 @@ def solve(str)
       longest = count if count > longest
     else
       count = 0
-
     end
   end
 
