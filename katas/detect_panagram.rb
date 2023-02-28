@@ -20,9 +20,13 @@ is true:
 =end
 
 
-def pangram?(string)
+def panagram?(string)
   alphabet = ("a".."z").to_a
   array = string.downcase.split("")
   
   alphabet.all? { |letter| array.include?(letter) }
 end
+
+
+p panagram?("The quick brown fox jumps over the lazy dog.") == true
+p panagram?("This is not a pangram.") == false

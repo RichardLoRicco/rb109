@@ -12,34 +12,19 @@ examples:
 ----
 
 algorithm:
-- initialize empty array all_sum_pairs
-- initialize last_index to size of ints array - 1
 
-- iterate through ints with index and for each num and index:
-  - initialize index2 to index + 1
-  loop as follows:
-  - initialize pair to [num, ind[index2]]
-  - add pair to all_sum_pairs if sum of the elements of pair equal sum
-  - increment index2 by 1
-  - break if index2 > last_index
-  
-  - sort all_sum_pairs by the index of the second character
-    -> return the subarray at index position 0 of the sorted nested array
 =end
 
+# This is not my solution, but rather the correct one
 def sum_pairs(ints, s)
-  all_sum_pairs = []
-  last_index = ints.size - 1
-  
-  ints.each_with_index do |num, index|
-    index2 = index + 1
-    loop do
-      break if index2 > last_index
-      pair = [num, ints[index2]]
-      all_sum_pairs << pair if pair.reduce(:+) == s
-      index2 += 1
+  def sum_pairs(ints, s)  # Define a method that takes an array of integers and a sum value as arguments
+    seen = {}             # Create an empty hash to keep track of seen integers
+    ints.each do |i|     # Loop through each integer in the array
+      return [s-i, i] if seen[s-i]  # Check if the complement of the current integer has been seen before
+                                    # If it has, return the current integer and its complement
+      seen[i] = true      # Mark the current integer as seen by adding it to the hash
     end
-    all_sum_pairs.sort_by { |subarray| ints.index(subarray[1]) }[0]
+    nil                   # If no pair is found, return nil
   end
 end
 
