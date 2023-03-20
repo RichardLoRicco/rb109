@@ -42,6 +42,8 @@ def common_prefix(arr)
   longest
 end
 
+# this is the right way, as we are looking for the longest PREFIX
+
 puts common_prefix(["flower", "flow", "fliwht"]) == "fl"
 puts common_prefix(["dog", "racecar", "car"]) == ""
 puts common_prefix(["interspecies", "interstellar", "interstate"]) == "inters"

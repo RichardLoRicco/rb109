@@ -10,8 +10,8 @@ lights are on after n repetitions.
 ----
 
 input: a number, n, denoting the total number of switches
-return: an arrray that identifies which lights are on after n repetitions
-rules;
+return: an array that identifies which lights are on after n repetitions
+rules:
   - all switches are initially off
   - each time you toggle the switches, you increment the toggle interval by 1
     -> the following describes the toggling at each pass:

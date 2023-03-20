@@ -63,6 +63,7 @@ algorithm:
 
 =end
 
+
 def sum_pairs(list, sum)
   sum_pairs = []
   last_index = list.size - 1
@@ -76,7 +77,7 @@ def sum_pairs(list, sum)
 
   return nil if sum_pairs.empty?
 
-  sum_pairs.sort_by { |pair| list.find_index(pair[1]) }[0]
+  sum_pairs.sort_by { |pair| list.rindex(pair[1]) }[0]
 end
 
 l1 = [1, 4, 8, 7, 3, 15]

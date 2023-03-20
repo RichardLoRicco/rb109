@@ -38,9 +38,11 @@ define fibonacci method that accepts 1 parameter, n
 
 =end
 
-def fibonacci_last(nth)
-  fibonacci(nth).to_s[-1].to_i
-end
+# # This is one way to do it using the prior method, but it would take forever to run
+# def fibonacci_last(nth)
+#   fibonacci(nth).to_s[-1].to_i
+# end
+
 
 def fibonacci_last(nth)
   last_2 = [1, 1]
